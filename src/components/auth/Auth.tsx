@@ -1,9 +1,12 @@
-import React from 'react'
+'use client';
+
+import { useState } from 'react';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 const Auth = () => {
-  return (
-    <div>Auth</div>
-  )
-}
+  const [view, setView] = useState<string>('SIGNUP');
+  return <main>{view === 'SIGNUP' ? <SignUp /> : <SignIn />}</main>;
+};
 
-export default Auth
+export default Auth;
