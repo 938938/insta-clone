@@ -4,6 +4,8 @@ import './globals.css';
 import RecoilProvider from '@/config/RecoilProvider';
 import ReactQueryClientProviders from '@/config/ReactQueryClientProvider';
 import MaterialProvider from '@/config/material-tailwind-theme-provider';
+import MainLayout from '@/components/layout/MainLayout';
+import Auth from '@/components/auth/Auth';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const loggedIn = false;
+
   return (
     <RecoilProvider>
       <ReactQueryClientProviders>
@@ -28,7 +32,9 @@ export default function RootLayout({ children }) {
                 referrerPolicy='no-referrer'
               />
             </head>
-            <body className={inter.className}>{children}</body>
+            <body className={inter.className}>
+              {loggedIn ? <MainLayout>{children}</MainLayout> : <Auth />}
+            </body>
           </html>
         </MaterialProvider>
       </ReactQueryClientProviders>
