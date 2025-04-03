@@ -6,6 +6,7 @@ import { useState } from 'react';
 const SignUp = ({ setView }) => {
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
+  
   return (
     <div className='flex flex-col gap-4'>
       <div className='pt-10 pb-6 px-10 w-full flex flex-col items-center justify-center max-w-lg border border-gray-400 bg-white gap-2'>
