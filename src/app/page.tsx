@@ -4,5 +4,5 @@ export const metadata = {
 };
 
 export default function Home() {
-  return <main></main>;
+  return <main className='w-full'>asdf</main>;
 }
