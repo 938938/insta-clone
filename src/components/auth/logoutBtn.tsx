@@ -1,9 +1,9 @@
-import React from 'react'
+'use client';
 
-const logoutBtn = () => {
-  return (
-    <div>logoutBtn</div>
-  )
-}
+import { Button } from '@material-tailwind/react';
 
-export default logoutBtn
+const LogoutBtn = () => {
+  return <Button color='red'>로그아웃</Button>;
+};
+
+export default LogoutBtn;

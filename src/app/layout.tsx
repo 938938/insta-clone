@@ -9,7 +9,7 @@ import Auth from '@/components/auth/Auth';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (
     <RecoilProvider>

@@ -1,12 +1,38 @@
 'use client';
 
+import { createBrowserSupabaseClient } from '@/utils/supabase/client';
 import { Button, Input } from '@material-tailwind/react';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const SignUp = ({ setView }) => {
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
-  
+  const [confirmationRequired, setConfirmationRequired] =
+    useState<boolean>(false);
+
+  const supabase = createBrowserSupabaseClient();
+
+  const signupMutation = useMutation({
+    mutationFn: async () => {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password: pw,
+        options: {
+          emailRedirectTo: 'http://localhost:3000/signup/confirm',
+        },
+      });
+
+      if (data) {
+        setConfirmationRequired(true);
+      }
+
+      if (error) {
+        alert(error.message);
+      }
+    },
+  });
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='pt-10 pb-6 px-10 w-full flex flex-col items-center justify-center max-w-lg border border-gray-400 bg-white gap-2'>
@@ -27,12 +53,14 @@ const SignUp = ({ setView }) => {
         />
         <Button
           onClick={() => {
-            console.log('signup');
+            signupMutation.mutate();
           }}
+          loading={signupMutation.isPending}
           color='light-blue'
           className='w-full text-md py-1'
+          disabled={confirmationRequired}
         >
-          가입
+          {confirmationRequired ? '메일을 확인해주세요.' : '가입'}
         </Button>
       </div>
 
